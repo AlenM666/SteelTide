@@ -69,7 +69,7 @@ set(BUILD_GAMES    OFF CACHE BOOL "" FORCE)
 FetchContent_Declare(
     raylib
     GIT_REPOSITORY https://github.com/raysan5/raylib.git
-    GIT_TAG        master          # Pin to a stable release
+    GIT_TAG        5.5          # Pin to a stable release
     GIT_SHALLOW    TRUE
 )
 FetchContent_MakeAvailable(raylib)
@@ -79,6 +79,10 @@ FetchContent_MakeAvailable(raylib)
 # =============================================================================
 set(SRC_FILES
     src/main.cpp
+
+    src/engine/core/application.cpp
+    src/engine/core/window.cpp
+
 
     )
 
@@ -227,28 +231,35 @@ endif()
 # =============================================================================
 # Link Time Optimization
 # =============================================================================
-# if(ENABLE_LTO)
-#     include(CheckIPOSupported)
-#     check_ipo_supported(RESULT supported OUTPUT error)
-#     if(supported)
-#         set_target_properties(${PROJECT_NAME} PROPERTIES
-#             INTERPROCEDURAL_OPTIMIZATION_RELEASE TRUE
-#         )
-#     else()
-#         message(WARNING "LTO not supported: ${error}")
-#     endif()
-# endif()
+
+if(ENABLE_LTO)
+    include(CheckIPOSupported)
+    check_ipo_supported(RESULT supported OUTPUT error)
+    if(supported)
+        set_target_properties(${PROJECT_NAME} PROPERTIES
+            INTERPROCEDURAL_OPTIMIZATION_RELEASE TRUE
+        )
+    else()
+        message(WARNING "LTO not supported: ${error}")
+    endif()
+endif()
 
 # =============================================================================
 # Sanitizers
 # =============================================================================
-if(ENABLE_SANITIZERS AND NOT MSVC)
-    target_compile_options(${PROJECT_NAME} PRIVATE
-        $<$<CONFIG:Debug>:-fsanitize=address,undefined>
-    )
-    target_link_options(${PROJECT_NAME} PRIVATE
-        $<$<CONFIG:Debug>:-fsanitize=address,undefined>
-    )
+# if(ENABLE_SANITIZERS AND NOT MSVC)
+#     target_compile_options(${PROJECT_NAME} PRIVATE
+#         $<$<CONFIG:Debug>:-fsanitize=address,undefined>
+#     )
+#     target_link_options(${PROJECT_NAME} PRIVATE
+#         $<$<CONFIG:Debug>:-fsanitize=address,undefined>
+#     )
+# endif()
+
+if(ENABLE_SANITIZERS AND NOT MSVC AND CMAKE_BUILD_TYPE STREQUAL "Debug")
+    message(STATUS "│  !! Sanitizers ON — requires libasan + libubsan")
+    target_compile_options(${PROJECT_NAME} PRIVATE -fsanitize=address,undefined)
+    target_link_options(${PROJECT_NAME}    PRIVATE -fsanitize=address,undefined)
 endif()
 
 # =============================================================================

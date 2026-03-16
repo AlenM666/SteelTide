@@ -15,11 +15,10 @@ Open-world 2D pirate/exploration RPG — c++ with Raylib
 
 ## To-do list
 
-1. window:
-
-- [] Make window
-- [] Make window fullscreen
-- [] Make window resizable
+1. Window:
+- [ ] Make window
+- [ ] Make window fullscreen
+- [ ] Make window resizable
 
 
 

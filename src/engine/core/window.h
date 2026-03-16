@@ -15,7 +15,7 @@ namespace engine
         int height = 720;
         int targetFPS = 240;
         bool vsync = true;
-        bool resizable = true;
+        bool resizable = false;
         bool fullscreen = true;
         bool mssa_4x = true;
     };

@@ -10,7 +10,7 @@
       # ./build/debug/bin/SaltAndSoil
 #
 #   With sanitizers:
-cmake -B build/debug -G Ninja  -DCMAKE_BUILD_TYPE=Debug -DENABLE_SANITIZERS=ON 
+cmake -B build/debug -G Ninja  -DCMAKE_BUILD_TYPE=Debug
 cmake --build build/debug
 ./build/debug/bin/SteelTide
 #
