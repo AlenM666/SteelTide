@@ -80,8 +80,12 @@ FetchContent_MakeAvailable(raylib)
 set(SRC_FILES
     src/main.cpp
 
+    # engine
     src/engine/core/application.cpp
     src/engine/core/window.cpp
+
+    # constants
+    src/constants/constants.cpp
 
 
     )
