@@ -11,13 +11,13 @@ namespace engine
     struct WindowConfig
     {
         std::string title = "Steel Tide";
-        int width = 1280;
-        int height = 720;
-        int targetFPS = 240;
-        bool vsync = true;
-        bool resizable = false;
-        bool fullscreen = true;
-        bool mssa_4x = true;
+        int width;
+        int height;
+        int targetFPS;
+        bool vsync;
+        bool resizable;
+        bool fullscreen;
+        bool mssa_4x;
     };
 
     //   Thin RAII wrapper around the Raylib window.
@@ -58,7 +58,7 @@ namespace engine
             
             double get_time() const; // used for animations and cooldowns
             double get_delta_time() const; // used for movment and physics
-            float get_fps() const; // used for debugging and performance monitoring
+            int get_fps() const; // used for debugging and performance monitoring
 
 
             // setters

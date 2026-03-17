@@ -12,6 +12,9 @@ namespace engine
         // The destructor is a safety net in case an exception unwinds the stack
         // before we get there — Window's own destructor handles CloseWindow(),
         // so nothing extra is needed here yet.
+        
+        
+        // shutdown();
     }
 
     void Application::run()
@@ -38,11 +41,11 @@ namespace engine
     {
         WindowConfig cfg;
         cfg.title = "Steel Tide";
-        cfg.width = 1280;
-        cfg.height = 720;
+        cfg.width = 800;
+        cfg.height = 600;
         cfg.targetFPS = 240;
-        cfg.vsync = true;
-        cfg.resizable = false;
+        cfg.vsync = false;
+        cfg.resizable = true;
         cfg.fullscreen = true;
         cfg.mssa_4x = true;
 
@@ -86,8 +89,6 @@ namespace engine
 
         if (IsKeyPressed(KEY_F11))
         {
-            // m_window.close();
-            // m_window.init({.fullscreen = !m_window.is_fullscreen()});
             m_window.toggle_fullscreen();
         }
 

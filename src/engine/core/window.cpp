@@ -21,10 +21,10 @@ namespace engine
         // build raylib config flags
         unsigned int flags = 0;
         
-        if (config.vsync) flags != FLAG_VSYNC_HINT;
-        if (config.resizable) flags != FLAG_WINDOW_RESIZABLE;
-        if (config.mssa_4x) flags != FLAG_MSAA_4X_HINT;
-        if (config.fullscreen) flags != FLAG_FULLSCREEN_MODE;
+        if (config.vsync) flags |= FLAG_VSYNC_HINT;
+        if (config.resizable) flags |= FLAG_WINDOW_RESIZABLE;
+        if (config.mssa_4x) flags |= FLAG_MSAA_4X_HINT;
+        if (config.fullscreen) flags |= FLAG_FULLSCREEN_MODE;
 
         SetConfigFlags(flags);
 
@@ -104,7 +104,7 @@ namespace engine
         return GetFrameTime();
     }
     
-    float Window::get_fps() const
+    int Window::get_fps() const
     {
         return GetFPS();
     }
